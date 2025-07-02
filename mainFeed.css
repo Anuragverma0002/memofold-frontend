@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: #f9f9fb;
+  background: #f7f8fa;
   color: #2c2c2c;
   line-height: 1.6;
 }
@@ -21,13 +21,14 @@ body {
 .top-bar h1 {
   font-weight: 700;
   color: #1a1a1a;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin: 0;
+  letter-spacing: 0.5px;
 }
 
 .top-bar nav {
   display: flex;
-  gap: 25px;
+  gap: 24px;
   align-items: center;
 }
 
@@ -41,6 +42,21 @@ body {
 .top-bar nav a:hover {
   color: #007aff;
   transform: scale(1.2);
+}
+
+/* ---------- Profile Avatar Button ---------- */
+.profile-avatar img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid transparent;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.profile-avatar img:hover {
+  border-color: #007aff;
+  transform: scale(1.1);
 }
 
 /* ---------- Posts Section ---------- */
@@ -189,5 +205,10 @@ body {
   .post-profile-pic {
     width: 38px;
     height: 38px;
+  }
+
+  .profile-avatar img {
+    width: 32px;
+    height: 32px;
   }
 }
