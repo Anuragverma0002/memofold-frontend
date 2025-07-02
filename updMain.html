@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Profile Dashboard</title>
+  <title>MemoFold - Profile Dashboard</title>
   <link rel="stylesheet" href="style_5.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
-
 <body>
   <div class="main">
+    <!-- Topbar -->
     <div class="topbar">
+      <!-- Settings Menu -->
       <div class="settings-dropdown">
         <div class="dropdown">
           <button class="comment-btn"><i class="fas fa-bars"></i></button>
@@ -29,21 +29,21 @@
         </div>
       </div>
 
-      <!-- Modern Calendar and Feed Buttons -->
+      <!-- Calendar & Feed -->
       <div class="calendar-feed-group">
         <label class="modern-calendar">
-          <i class="fas fa-calendar-alt"></i>
           <input type="date" id="calendar" min="1950-01-01" max="2025-12-31" />
         </label>
-
-        <a href="mainFeed.html" class="modern-feed-btn" title="Main Feed">
-          <i class="fas fa-newspaper"></i> Feed
+        <a href="mainFeed.html" class="modern-feed-btn">
+          <i class="fas fa-newspaper"></i> Main Feed
         </a>
       </div>
     </div>
 
+    <!-- Content Area -->
     <div class="content-wrapper">
       <div class="content-center">
+        <!-- Post Box -->
         <section class="post-box">
           <textarea id="postContent" placeholder="Write your post..."></textarea>
           <div class="icons">
@@ -53,6 +53,7 @@
           <div id="charCount">0 characters</div>
         </section>
 
+        <!-- Display Posted Data -->
         <section class="post">
           <p id="selectedDateLabel">Date: </p>
           <small id="timeLabel">Time: --:--:--</small>
@@ -61,6 +62,12 @@
     </div>
   </div>
 
+  <script>
+    // Dark Mode Toggle
+    document.getElementById('darkModeToggle').addEventListener('change', function () {
+      document.body.classList.toggle('dark-mode', this.checked);
+    });
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
