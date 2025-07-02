@@ -415,3 +415,84 @@ body.dark-mode .comment-btn {
 body.dark-mode .dropdown-content span:hover {
   background-color: #333;
 }
+
+/* NEW: Modern Calendar Style */
+.modern-calendar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 6px 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 14px;
+  gap: 8px;
+  color: #0077cc;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.modern-calendar input[type="date"] {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.modern-calendar:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* NEW: Stylish Main Feed Button */
+.modern-feed-btn {
+  padding: 8px 16px;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.modern-feed-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(to right, #0072ff, #00c6ff);
+}
+
+/* Wrapper for calendar + feed button */
+.calendar-feed-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .content-center {
+    margin-top: 30px;
+    padding: 0 10px;
+  }
+
+  .post-box textarea {
+    height: 150px;
+  }
+
+  .modern-feed-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}
+
