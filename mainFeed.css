@@ -212,3 +212,14 @@ body {
     height: 32px;
   }
 }
+.profile-icon i {
+  font-size: 28px;
+  color: #555;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.profile-icon:hover i {
+  color: #007aff;
+  transform: scale(1.15);
+}
+
