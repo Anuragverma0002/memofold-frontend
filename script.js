@@ -443,13 +443,18 @@ if (path.includes("mainFeed.html")) {
 
         if (res.ok) {
           const user = await res.json();
-          const pic = user.profilePic?.trim() || "https://ui-avatars.com/api/?name=User&background=random";
-          profilePicImg.src = pic;
-        }
-      } catch (err) {
-        console.error("Error loading profile picture:", err);
-      }
+            const BASE_BACKEND =  "https://memofold-backend.onrender.com";
+
+      const pic = user.profilePic?.trim()
+        ? `${BASE_BACKEND}${user.profilePic}` // prepend backend domain
+        : "https://ui-avatars.com/api/?name=User&background=random";
+
+      profilePicImg.src = pic;
     }
+  } catch (err) {
+    console.error("Error loading profile picture:", err);
+  }
+}
 
     const postsContainer = document.getElementById("userPosts");
 
