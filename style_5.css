@@ -1,47 +1,66 @@
-/* ------------------ Reset ------------------ */
+/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* ------------------ Global Body ------------------ */
+/* Global Body */
 body {
   font-family: 'Segoe UI', sans-serif;
   display: flex;
-  flex-direction: column;
   background: linear-gradient(to right, #f0f4f8, #e6e9f0);
-  min-height: 100vh;
-  overflow-x: hidden;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* ------------------ Topbar ------------------ */
+/* Main Area */
+.main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Topbar */
 .topbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  flex-wrap: wrap;
   gap: 15px;
-  padding: 10px 20px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
-/* ------------------ Search and Calendar ------------------ */
 .search-home-wrapper {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 10px;
 }
 
+.logout-button {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  color: red;
+}
+
+
+/* Search Bar */
 .search-bar {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 14px;
   min-width: 180px;
-  flex: 1;
 }
 
+/* Calendar Picker */
 .calendar-picker {
   padding: 6px 12px;
   font-size: 14px;
@@ -56,41 +75,41 @@ body {
   background-color: #e0e0e0;
 }
 
-/* ------------------ Modern Calendar ------------------ */
-.modern-calendar {
-  display: flex;
-  align-items: center;
-  background: #fff;
-  padding: 6px 12px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  font-size: 14px;
-  gap: 8px;
-  color: #0077cc;
-  border: 1px solid #ddd;
-}
-
-.modern-calendar input[type="date"] {
-  border: none;
-  outline: none;
-  background: transparent;
-  font-size: 14px;
-  color: #333;
+/* Top Icons */
+.top-icon {
+  font-size: 20px;
   cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: #f2f2f2;
+  transition: background 0.2s;
 }
 
-/* ------------------ Header ------------------ */
+.top-icon:hover {
+  background-color: #cbd5e1; /* refined hover */
+}
+
+/* Settings Dropdown */
+.settings-dropdown {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.settings-dropdown .dropdown-content.settings {
+  width: 220px;
+}
+
+/* Header Section */
 .header {
   display: flex;
   align-items: center;
   padding: 20px;
   background: url('background.jpg') center/cover no-repeat;
   border-radius: 10px;
-  margin: 20px auto;
+  margin-bottom: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  flex-wrap: wrap;
-  gap: 15px;
-  max-width: 800px;
 }
 
 .dp {
@@ -98,6 +117,7 @@ body {
   height: 60px;
   background-color: gray;
   border-radius: 50%;
+  margin-right: 20px;
   border: 3px solid #fff;
 }
 
@@ -106,58 +126,54 @@ body {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-/* ------------------ Main Area ------------------ */
-.main {
-  flex: 1;
-  padding: 20px;
-  width: 100%;
-  position: relative;
-}
-
-/* ------------------ Content Layout ------------------ */
+/* Content Layout */
 .content-center {
-  max-width: 800px;
-  margin: 40px auto 20px;
+  max-width: 600px;
+  margin: 80px auto 0 auto; /* shifted downward */
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 0 15px;
 }
 
-/* ------------------ Post Section ------------------ */
+/* Post Section */
 .post {
   background: white;
   padding: 15px;
   border-radius: 12px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   position: relative;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .post .actions {
   position: absolute;
   top: 10px;
   right: 10px;
-  display: flex;
-  gap: 6px;
+  font-size: 14px;
 }
 
 .post .actions span {
   cursor: pointer;
   padding: 2px 6px;
   border-radius: 6px;
+  margin-left: 4px;
   transition: all 0.3s ease-in-out;
+}
+
+.post .actions span:hover {
+  font-weight: bold;
+  transform: scale(1.05);
 }
 
 .post .actions .edit:hover {
   background-color: #e0f0ff;
-  color: #007bff;
   box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+  color: #007bff;
 }
 
 .post .actions .delete:hover {
   background-color: #ffe5e5;
-  color: #e60000;
   box-shadow: 0 2px 6px rgba(255, 0, 0, 0.2);
+  color: #e60000;
 }
 
 .post p {
@@ -168,7 +184,7 @@ body {
   color: #666;
 }
 
-/* ------------------ Post Box ------------------ */
+/* Post Box */
 .post-box {
   background-color: #ffffff;
   padding: 15px;
@@ -192,49 +208,25 @@ body {
 
 .post-box textarea:focus {
   outline: none;
-  border-color: #888;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: #888;
 }
 
-.post-box button {
-  padding: 10px 16px;
-  font-size: 14px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(to right, #00c6ff, #0072ff);
-  color: white;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.post-box button:hover {
-  background: linear-gradient(to right, #0072ff, #00c6ff);
-  transform: translateY(-2px);
-}
-
-/* ------------------ Feed Button ------------------ */
-.modern-feed-btn {
+/* Popup */
+.popup {
+  position: absolute;
+  margin-top: 8px;
   padding: 8px 16px;
-  background: linear-gradient(to right, #00c6ff, #0072ff);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  background-color: #4bb34e;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  font-weight: bold;
+  white-space: nowrap;
 }
 
-.modern-feed-btn:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(to right, #0072ff, #00c6ff);
-}
-
-/* ------------------ Icons ------------------ */
+/* Icons */
 .icons {
   display: flex;
   gap: 15px;
@@ -256,6 +248,9 @@ body {
 .comment-btn:hover {
   background: #e0f7fa;
   color: #00796b;
+}
+
+.icon:hover {
   transform: scale(1.15);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -264,7 +259,26 @@ body {
   color: red;
 }
 
-/* ------------------ Dropdown ------------------ */
+/* Post Button */
+.post-box button {
+  padding: 10px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.post-box button:hover {
+  background: linear-gradient(to right, #0072ff, #00c6ff);
+}
+
+/* Dropdown for Comments */
 .dropdown {
   position: relative;
   display: inline-block;
@@ -278,8 +292,13 @@ body {
   border-radius: 12px;
   cursor: pointer;
   box-shadow: 3px 3px 8px #ccc, -3px -3px 8px #fff;
-  color: #333;
   transition: all 0.2s ease-in-out;
+  color: #333;
+}
+
+.comment-btn:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .dropdown-content {
@@ -309,6 +328,7 @@ body {
   background-color: #f0f0f0;
 }
 
+/* Feedback icon spacing enhancement */
 .dropdown-content span i {
   margin-right: 10px;
   width: 18px;
@@ -319,7 +339,53 @@ body {
   display: block;
 }
 
-/* ------------------ Dark Mode ------------------ */
+/* Dark Mode Switch Slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #007bff;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* Optional: Dark mode styles */
 body.dark-mode {
   background: #121212;
   color: #f0f0f0;
@@ -350,22 +416,74 @@ body.dark-mode .dropdown-content span:hover {
   background-color: #333;
 }
 
-/* ------------------ Responsive ------------------ */
+
+/* NEW: Modern Calendar Style */
+.modern-calendar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 6px 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 14px;
+  gap: 8px;
+  color: #0077cc;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.modern-calendar input[type="date"] {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.modern-calendar:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* NEW: Stylish Main Feed Button */
+.modern-feed-btn {
+  padding: 8px 16px;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.modern-feed-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(to right, #0072ff, #00c6ff);
+}
+
+/* Wrapper for calendar + feed button */
+.calendar-feed-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Responsive Layout */
 @media (max-width: 768px) {
   .topbar {
     flex-direction: column;
     align-items: flex-start;
-    padding: 10px;
-  }
-
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: center;
-    padding: 15px;
+    gap: 10px;
   }
 
   .content-center {
+    margin-top: 30px;
     padding: 0 10px;
   }
 
@@ -376,9 +494,5 @@ body.dark-mode .dropdown-content span:hover {
   .modern-feed-btn {
     padding: 6px 12px;
     font-size: 14px;
-  }
-
-  .icons {
-    justify-content: center;
   }
 }
