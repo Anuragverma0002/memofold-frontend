@@ -1,10 +1,13 @@
+/* ---------- Base Styles ---------- */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: #fdfaf6;
+  background: #f9f9fb;
   color: #2c2c2c;
+  line-height: 1.6;
 }
 
+/* ---------- Top Navigation Bar ---------- */
 .top-bar {
   background: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -12,41 +15,54 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .top-bar h1 {
-  font-weight: 600;
+  font-weight: 700;
   color: #1a1a1a;
-  letter-spacing: 1px;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.top-bar nav {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 .top-bar nav a {
-  margin-left: 20px;
   text-decoration: none;
   color: #555;
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .top-bar nav a:hover {
   color: #007aff;
 }
 
+/* ---------- Posts Section ---------- */
 .posts-grid {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
   gap: 30px;
+  max-width: 1200px;
+  margin: auto;
 }
 
+/* ---------- Post Card ---------- */
 .user-post-card {
   width: 100%;
   max-width: 700px;
-  background: #fefefe;
+  background: #fff;
   border-radius: 20px;
   padding: 20px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .user-post-card:hover {
@@ -55,38 +71,49 @@ body {
   cursor: pointer;
 }
 
+/* ---------- Post Header ---------- */
 .post-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  margin-bottom: 15px;
+}
 
-  margin-bottom: 10px;
-  
+.post-profile-pic {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .username {
   font-size: 1rem;
   font-weight: 600;
-  color: #2c2c2c;
+  color: #1a1a1a;
   margin: 0;
 }
 
+/* ---------- Post Image ---------- */
 .post-img {
   width: 100%;
   height: auto;
-  border-radius: 14px;
+  border-radius: 16px;
   margin-bottom: 12px;
+  object-fit: cover;
 }
 
+/* ---------- Post Content ---------- */
 .post-content {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.05rem;
   color: #333;
+  margin-bottom: 10px;
 }
+
+/* ---------- Like Section ---------- */
 .like-section {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-top: 10px;
 }
 
@@ -95,7 +122,7 @@ body {
   border: none;
   cursor: pointer;
   font-size: 22px;
-  color: #888;
+  color: #999;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -117,6 +144,7 @@ body {
   font-weight: 500;
 }
 
+/* ---------- Like Animation ---------- */
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -129,10 +157,35 @@ body {
   }
 }
 
-.post-profile-pic {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  
+/* ---------- Responsive Design ---------- */
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .top-bar h1 {
+    margin-bottom: 10px;
+  }
+
+  .posts-grid {
+    padding: 20px 15px;
+  }
+
+  .user-post-card {
+    padding: 15px;
+  }
+
+  .post-content {
+    font-size: 1rem;
+  }
+
+  .like-btn {
+    font-size: 20px;
+  }
+
+  .post-profile-pic {
+    width: 38px;
+    height: 38px;
+  }
 }
