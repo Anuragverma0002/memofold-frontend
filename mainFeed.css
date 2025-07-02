@@ -27,20 +27,20 @@ body {
 
 .top-bar nav {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 10px;
+  gap: 25px;
+  align-items: center;
 }
 
 .top-bar nav a {
-  text-decoration: none;
   color: #555;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  font-size: 20px;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .top-bar nav a:hover {
   color: #007aff;
+  transform: scale(1.2);
 }
 
 /* ---------- Posts Section ---------- */
@@ -162,10 +162,12 @@ body {
   .top-bar {
     flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
   }
 
-  .top-bar h1 {
-    margin-bottom: 10px;
+  .top-bar nav {
+    gap: 20px;
+    margin-top: 10px;
   }
 
   .posts-grid {
