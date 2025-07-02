@@ -12,7 +12,6 @@
 <body>
   <div class="main">
     <div class="topbar">
-      <!-- Settings Dropdown -->
       <div class="settings-dropdown">
         <div class="dropdown">
           <button class="comment-btn"><i class="fas fa-bars"></i></button>
@@ -30,16 +29,17 @@
         </div>
       </div>
 
-      <!-- Logout Button -->
-      <!-- <div class="search-home-wrapper">
-        <button class="logout-button" id="logoutBtn" title="Logout">
-          <i class="fas fa-sign-out-alt"></i>
-        </button>
-      </div> -->
+      <!-- Modern Calendar and Feed Buttons -->
+      <div class="calendar-feed-group">
+        <label class="modern-calendar">
+          <i class="fas fa-calendar-alt"></i>
+          <input type="date" id="calendar" min="1950-01-01" max="2025-12-31" />
+        </label>
 
-      <!-- Calendar & Feed Link -->
-      <input type="date" class="calendar-picker" id="calendar" min="1950-01-01" max="2025-12-31" />
-      <a href="mainFeed.html" class="top-icon" title="Main Feed">📰</a>
+        <a href="mainFeed.html" class="modern-feed-btn" title="Main Feed">
+          <i class="fas fa-newspaper"></i> Feed
+        </a>
+      </div>
     </div>
 
     <div class="content-wrapper">
@@ -61,14 +61,6 @@
     </div>
   </div>
 
-  <!-- <script>
-    // Logout functionality
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      localStorage.removeItem("token"); // or sessionStorage.clear();
-      window.location.href = "/login.html"; // redirect to login
-    });
-  </script> -->
   <script src="script.js"></script>
 </body>
-
 </html>
