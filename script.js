@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname.toLowerCase();
-const API_BASE = "https://memofold-qm48.onrender.com/api";
+const API_BASE = "https://memofold-backend.onrender.com/api";
 
 
 
