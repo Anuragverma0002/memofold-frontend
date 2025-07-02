@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/signin", "destination": "/signin.html" },
+    { "source": "/forgotpass", "destination": "/forgotpass.html" },
+    { "source": "/resetpass", "destination": "/resetpass.html" },
+    { "source": "/updmain", "destination": "/updMain.html" },
+    { "source": "/mainfeed", "destination": "/mainFeed.html" },
+    { "source": "/profile", "destination": "/profile.html" },
+    { "source": "/feedback", "destination": "/feedback.html" }
+  ]
+}
