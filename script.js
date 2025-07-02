@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname.toLowerCase();
-  const API_BASE = "http://127.0.0.1:3000/api";
-
+  const API_BASE = "https://memofold-qm48.onrender.com/api";
 
   // ========== LOGIN ==========
   if (path.includes("login.html")) {
@@ -46,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (path.includes("signin.html")) {
     const signUpForm = document.querySelector("form");
     const usernameInput = document.getElementById("username");
-    const emailInput = document.getElementById("email"); // ✅ New line
+    const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
     const confirmPassword = document.getElementById("confirm-password");
     const realnameInput = document.getElementById("realname");
@@ -66,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify({
             realname: realnameInput.value.trim(),
             username: usernameInput.value.trim(),
-            email: emailInput.value.trim(), // ✅ Include Gmail
+            email: emailInput.value.trim(),
             password: passwordInput.value.trim(),
           }),
           credentials: "include",
@@ -79,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-
         localStorage.setItem("username", usernameInput.value.trim());
         localStorage.setItem("realname", realnameInput.value.trim());
 
@@ -91,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
 
   // =============================
   // FORGOT PASSWORD FUNCTIONALITY
@@ -122,10 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-          const response = await fetch("http://localhost:3000/api/auth/request-reset", {
+          const response = await fetch(`${API_BASE}/auth/request-reset`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: value }) // Using "email" field for both email/username
+            body: JSON.stringify({ email: value })
           });
 
           const result = await response.json();
@@ -178,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-          const response = await fetch(`http://localhost:3000/api/auth/reset-password/${token}`, {
+          const response = await fetch(`${API_BASE}/auth/reset-password/${token}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ password }) // ✅ Only send password
@@ -208,8 +205,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   }
-
-
 
   // =====================
   // PROFILE DASHBOARD FUNCTIONALITY (updMain.html)
@@ -243,18 +238,18 @@ document.addEventListener("DOMContentLoaded", () => {
       postBtn.addEventListener("click", async () => {
         const content = postContent.value.trim();
       
-  const rawDate = calendar?.value;
-  const date = rawDate && rawDate.trim() !== "" 
-    ? rawDate 
-    : new Date().toISOString().split("T")[0]; // 'YYYY-MM-DD'
+        const rawDate = calendar?.value;
+        const date = rawDate && rawDate.trim() !== "" 
+          ? rawDate 
+          : new Date().toISOString().split("T")[0]; // 'YYYY-MM-DD'
 
-  const time = new Date().toLocaleTimeString();
+        const time = new Date().toLocaleTimeString();
 
         if (!content) return alert("Post content cannot be empty.");
 
         try {
           const token = localStorage.getItem("token");
-          const response = await fetch("http://localhost:3000/api/posts", {
+          const response = await fetch(`${API_BASE}/posts`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -353,8 +348,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   //MainFeed Functionality
-  
-if (path.includes("mainFeed.html")) {
+  if (path.includes("mainFeed.html")) {
     console.log("🌐 MainFeed script running");
 
     const token = localStorage.getItem("token");
@@ -372,19 +366,18 @@ if (path.includes("mainFeed.html")) {
       });
     }
 
-
     const feed = document.getElementById("feed");
 
-    fetch("http://localhost:3000/api/posts", {
+    fetch(`${API_BASE}/posts`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
       .then((res) => res.json())
       .then((posts) => {
-         feed.innerHTML = ""; // Clear existing content
+        feed.innerHTML = ""; // Clear existing content
         posts.forEach((post) => {
-            console.log("Fetched posts:", posts); // 🔍 Check this in browser console
+          console.log("Fetched posts:", posts); // 🔍 Check this in browser console
           const imageUrl = post.image && post.image.trim() !== ""
             ? post.image
             : "https://via.placeholder.com/300x200?text=No+Image";
@@ -393,24 +386,23 @@ if (path.includes("mainFeed.html")) {
             ? post.profilePic
             : `https://ui-avatars.com/api/?name=${encodeURIComponent(post.username)}&background=random`;
 
-               const postCard = document.createElement("div");
-        postCard.classList.add("user-post-card");
-        postCard.innerHTML = `
-          <div class="post-header">
-            <img src="${profilePic}" alt="Profile pic" class="post-profile-pic" />
-            <span class="username">@${post.username}</span>
-          </div>
-          ${imageUrl ? `<img class="post-img" src="${imageUrl}" alt="Post image" onerror="this.style.display='none'" />` : ""}
-          <div class="post-content">${post.content}</div>
-        `;
-        feed.appendChild(postCard);
+          const postCard = document.createElement("div");
+          postCard.classList.add("user-post-card");
+          postCard.innerHTML = `
+            <div class="post-header">
+              <img src="${profilePic}" alt="Profile pic" class="post-profile-pic" />
+              <span class="username">@${post.username}</span>
+            </div>
+            ${imageUrl ? `<img class="post-img" src="${imageUrl}" alt="Post image" onerror="this.style.display='none'" />` : ""}
+            <div class="post-content">${post.content}</div>
+          `;
+          feed.appendChild(postCard);
+        });
+      })
+      .catch((err) => {
+        console.error("Failed to fetch posts:", err);
       });
-    })
-    .catch((err) => {
-      console.error("Failed to fetch posts:", err);
-    });
-}
-
+  }
 
   // =====================
   // PROFILE PAGE: Show username
@@ -434,7 +426,7 @@ if (path.includes("mainFeed.html")) {
         const token = localStorage.getItem("token");
         if (!token || !profilePicImg) return;
 
-        const res = await fetch("http://localhost:3000/api/user/me", {
+        const res = await fetch(`${API_BASE}/user/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -442,7 +434,7 @@ if (path.includes("mainFeed.html")) {
 
         if (res.ok) {
           const user = await res.json();
-          const pic = user.profilePic?.trim() || "https://ui-avatars.com/api/?name=User&background=random";
+          const pic = user.profilePic?.trim() || "https://ui-avatars.com/api/?name=User &background=random";
           profilePicImg.src = pic;
         }
       } catch (err) {
@@ -452,12 +444,12 @@ if (path.includes("mainFeed.html")) {
 
     const postsContainer = document.getElementById("userPosts");
 
-    async function loadUserPosts() {
+    async function loadUser Posts() {
       try {
         const token = localStorage.getItem("token");
         const username = localStorage.getItem("username");
 
-        const response = await fetch(`http://localhost:3000/api/posts/user/${username}`, {
+        const response = await fetch(`${API_BASE}/posts/user/${username}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -465,7 +457,6 @@ if (path.includes("mainFeed.html")) {
 
         const data = await response.json();
         postsContainer.innerHTML = ""; // ✅ Clear previous posts every time
-
 
         if (!response.ok) {
           postsContainer.innerHTML = `<p class="error-message">Error loading posts: ${data.error || "Unknown error"}</p>`;
@@ -488,22 +479,18 @@ if (path.includes("mainFeed.html")) {
           const postDiv = document.createElement("div");
           postDiv.className = "user-post-card";
           postDiv.innerHTML = `
-    <div class="post-header">
-  <img src="${profilePic}" alt="Profile pic" class="post-profile-pic">
-  <span class="username">@${post.username}</span>
-</div>
-
-      ${imageUrl ? `<img class="post-img" src="${imageUrl}" alt="" onerror="this.style.display='none'" />` : ""}
-
-
-    <div class="post-content">${post.content}</div>
-    <div class="post-meta">
-      <span>Posted on: ${new Date(post.createdAt).toLocaleString()}</span>
-    </div>
-  `;
+            <div class="post-header">
+              <img src="${profilePic}" alt="Profile pic" class="post-profile-pic">
+              <span class="username">@${post.username}</span>
+            </div>
+            ${imageUrl ? `<img class="post-img" src="${imageUrl}" alt="" onerror="this.style.display='none'" />` : ""}
+            <div class="post-content">${post.content}</div>
+            <div class="post-meta">
+              <span>Posted on: ${new Date(post.createdAt).toLocaleString()}</span>
+            </div>
+          `;
           postsContainer.appendChild(postDiv);
         });
-
 
       } catch (err) {
         console.error("Failed to load user posts:", err);
@@ -511,7 +498,7 @@ if (path.includes("mainFeed.html")) {
       }
     }
 
-    loadUserPosts();  // Call it
+    loadUser Posts();  // Call it
     loadProfilePicture();
 
     // ================================
@@ -530,7 +517,7 @@ if (path.includes("mainFeed.html")) {
 
         try {
           const token = localStorage.getItem("token");
-          const res = await fetch("http://localhost:3000/api/user/upload-profile-pic", {
+          const res = await fetch(`${API_BASE}/user/upload-profile-pic`, {
             method: "POST",
             headers: {
               Authorization: `Bearer ${token}`,
@@ -576,101 +563,4 @@ if (path.includes("mainFeed.html")) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const name = form.name.value.trim();
-      const email = form.email.value.trim();
-      const type = form.type.value;  // Must match schema
-      const message = form.message.value.trim();
-
-      if (!name || !email || !type || !message) {
-        alert("Please fill in all fields correctly.");
-        return;
-      }
-
-      if (!validateEmail(email)) {
-        alert("Please enter a valid email address.");
-        return;
-      }
-
-      try {
-        const res = await fetch("http://localhost:3000/api/feedback", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, email, type, message }),
-        });
-
-        const data = await res.json();
-
-        if (!res.ok) {
-          alert("Error submitting feedback: " + (data.error || "Unknown error"));
-          return;
-        }
-
-        alert("Thank you for your feedback, " + name + "!");
-        form.reset();
-      } catch (err) {
-        console.error("Feedback submit error:", err);
-        alert("Failed to send feedback. Try again later.");
-      }
-    });
-  }
-
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
-
-
-  // redirect from  back button  to required html page 
-  const backBtn = document.querySelector(".back-btn");
-  if (backBtn) {
-    backBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-
-      const path = window.location.pathname.toLowerCase();
-
-      if (path.includes("resetpass.html") || path.includes("forgotpass.html")) {
-        window.location.href = "login.html"; // ✅ Go to login from reset/forgot
-      } else if (path.includes("feedback.html")) {
-        window.location.href = "updMain.html"; // ✅ Back from feedback
-      } else {
-        window.location.href = "login.html"; // fallback
-      }
-    });
-  }
-
-
-  const goBackBtn = document.getElementById("goBackBtn");
-  if (goBackBtn) {
-    goBackBtn.addEventListener("click", function () {
-      window.location.href = "updMain.html";
-    });
-  }
-
-  const loginButtonHelp = document.querySelector(".login-button");
-  if (loginButtonHelp) {
-    loginButtonHelp.addEventListener("click", function () {
-      window.location.href = "login.html";
-    });
-  }
-
-  const loginButtonPrivacy = document.querySelector(".login-button");
-  if (loginButtonPrivacy) {
-    loginButtonPrivacy.addEventListener("click", function () {
-      window.location.href = "login.html";
-    });
-  }
-
-  const loginBtnContact = document.querySelector(".login-btn");
-  if (loginBtnContact) {
-    loginBtnContact.addEventListener("click", function () {
-      window.location.href = "login.html";
-    });
-  }
-});
-
-// Redirect from term to login
-function redirectToLogin() {
-  window.location.href = "login.html";
-}
+     
