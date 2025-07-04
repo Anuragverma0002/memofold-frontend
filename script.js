@@ -386,9 +386,12 @@ if (path.includes("mainfeed.html")) {
          feed.innerHTML = ""; // Clear existing content
         posts.forEach((post) => {
             console.log("Fetched posts:", posts); // 🔍 Check this in browser console
-         const imageUrl = post.image?.trim()
-  ? post.image
-  : "https://ui-avatars.com/api/?name=No+Image&background=ddd&color=555&size=300";
+        posts.forEach((post) => {
+  ...
+  const imageUrl = post.image?.trim()
+    ? post.image
+    : "https://via.placeholder.com/300x200?text=No+Image"; // ❌ replace this
+
 
 let profilePic = post.profilePic?.trim();
 
