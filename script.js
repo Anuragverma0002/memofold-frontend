@@ -390,9 +390,12 @@ if (path.includes("mainfeed.html")) {
             ? post.image
             : "https://via.placeholder.com/300x200?text=No+Image";
 
-          const profilePic = post.profilePic?.trim()
-            ? post.profilePic
-            : `https://ui-avatars.com/api/?name=${encodeURIComponent(post.username)}&background=random`;
+         const profilePic = post.profilePic?.trim()
+  ? post.profilePic.startsWith("http")
+    ? post.profilePic
+    : `${API_BASE}${post.profilePic}`
+  : `https://ui-avatars.com/api/?name=${encodeURIComponent(post.username)}&background=random`;
+
 
                const postCard = document.createElement("div");
         postCard.classList.add("user-post-card");
