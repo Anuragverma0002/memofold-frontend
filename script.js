@@ -489,7 +489,10 @@ if (!profilePic || profilePic === "") {
 
         // Show posts
         data.reverse().forEach(post => {
-          const imageUrl = post.image?.trim() ? post.image : "";
+         const imageUrl = post.image?.trim()
+  ? post.image
+  : `https://ui-avatars.com/api/?name=Post&background=ddd&color=333&size=300`;
+
 
           const profilePic = post.profilePic?.trim()
             ? post.profilePic
