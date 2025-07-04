@@ -355,7 +355,7 @@ const API_BASE = "https://memofold-backend.onrender.com/api";
 
   //MainFeed Functionality
   
-if (path.includes("mainFeed.html")) {
+if (path.includes("mainfeed.html")) {
     console.log("🌐 MainFeed script running");
 
     const token = localStorage.getItem("token");
