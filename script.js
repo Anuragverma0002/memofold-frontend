@@ -355,7 +355,6 @@ const API_BASE = "https://memofold-backend.onrender.com/api";
 
   //MainFeed Functionality
   
-// MainFeed Functionality
 if (path.includes("mainfeed.html")) {
   console.log("🌐 MainFeed script running");
 
@@ -365,7 +364,6 @@ if (path.includes("mainfeed.html")) {
     return;
   }
 
-  // ✅ LOGOUT BUTTON HANDLER
   const logoutBtn = document.querySelector("#nav-logout");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", (e) => {
@@ -377,7 +375,6 @@ if (path.includes("mainfeed.html")) {
 
   const feed = document.getElementById("feed");
 
-  // ✅ ADD FETCH HERE
   fetch(`${API_BASE}/posts`, {
     method: "GET",
     headers: {
@@ -386,21 +383,16 @@ if (path.includes("mainfeed.html")) {
   })
     .then((res) => res.json())
     .then((posts) => {
-      console.log("Fetched posts:", posts);
-      feed.innerHTML = ""; // Clear previous content
+      feed.innerHTML = "";
+      posts.reverse().forEach((post) => {
+        console.log("Fetched post:", post);
 
-      posts.forEach((post) => {
         const imageUrl = post.image?.trim()
           ? post.image
           : "https://via.placeholder.com/300x200?text=No+Image";
 
         let profilePic = post.profilePic;
-        if (
-          !profilePic ||
-          profilePic === "null" ||
-          profilePic === null ||
-          profilePic.trim() === ""
-        ) {
+        if (!profilePic || profilePic === "null" || profilePic.trim() === "") {
           profilePic = `https://ui-avatars.com/api/?name=${encodeURIComponent(
             post.username
           )}&background=random`;
@@ -415,19 +407,20 @@ if (path.includes("mainfeed.html")) {
             <img src="${profilePic}" alt="Profile pic" class="post-profile-pic" />
             <span class="username">@${post.username}</span>
           </div>
-          ${imageUrl ? `<img class="post-img" src="${imageUrl}" alt="Post image" onerror="this.style.display='none'" />` : ""}
+          ${
+            imageUrl
+              ? `<img class="post-img" src="${imageUrl}" alt="Post image" onerror="this.style.display='none'" />`
+              : ""
+          }
           <div class="post-content">${post.content}</div>
         `;
-
         feed.appendChild(postCard);
       });
     })
     .catch((err) => {
       console.error("Failed to fetch posts:", err);
-      feed.innerHTML = `<p class="error-message">Failed to load posts. Please try again later.</p>`;
     });
 }
-
 
 
   // =====================
