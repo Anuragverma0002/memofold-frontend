@@ -393,9 +393,7 @@ if (path.includes("mainfeed.html")) {
 
         let profilePic = post.profilePic;
         if (!profilePic || profilePic === "null" || profilePic.trim() === "") {
-          profilePic = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-            post.username
-          )}&background=random`;
+          profilePic = `https://ui-avatars.com/api/?name=${encodeURIComponent(post.username)}&background=random`;
         } else if (!profilePic.startsWith("http")) {
           profilePic = `https://memofold-backend.onrender.com${profilePic}`;
         }
