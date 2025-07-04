@@ -389,13 +389,14 @@ if (path.includes("mainfeed.html")) {
           const imageUrl = post.image && post.image.trim() !== ""
             ? post.image
             : "https://via.placeholder.com/300x200?text=No+Image";
+let profilePic = post.profilePic?.trim();
 
-         const profilePic = post.profilePic?.trim()
-  ? post.profilePic.startsWith("http")
-    ? post.profilePic
-    : `${API_BASE}${post.profilePic}`
-  : `https://ui-avatars.com/api/?name=${encodeURIComponent(post.username)}&background=random`;
-
+if (!profilePic || profilePic === "") {
+  profilePic = `https://ui-avatars.com/api/?name=${encodeURIComponent(post.username)}&background=random`;
+} else if (!profilePic.startsWith("http")) {
+  // Relative path, add backend domain
+  profilePic = `https://memofold-backend.onrender.com${profilePic}`;
+}
 
                const postCard = document.createElement("div");
         postCard.classList.add("user-post-card");
