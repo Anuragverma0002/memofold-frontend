@@ -1,3 +1,4 @@
+/* Reset & Global */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -12,10 +13,17 @@ body {
   flex-direction: column;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+/* Layout Containers */
 .main-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   min-height: 100vh;
 }
 
@@ -35,14 +43,15 @@ body {
   justify-content: center;
   align-items: center;
   width: 300px;
-  height: 500px;
+  height: auto;
   position: relative;
 }
 
 .story-card {
   position: absolute;
   width: 250px;
-  height: 450px;
+  max-width: 90vw;
+  aspect-ratio: 9/16;
   border-radius: 25px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
@@ -88,108 +97,77 @@ body {
   z-index: 5;
 }
 
-/* Login Section */
-.container {
-  max-width: 380px;
+/* Post Feed Cards */
+.user-post-card {
   width: 100%;
-}
-
-.login-box {
+  max-width: 450px;
   background-color: #fff;
-  border: 1px solid #dbdbdb;
   border-radius: 16px;
   padding: 20px;
-  text-align: center;
-  margin-bottom: 10px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+.post-header {
+  display: flex;
   align-items: center;
-  font-family: 'Billabong', cursive;
-  font-size: 3rem;
-  font-weight: 400;
-  margin-bottom: 20px;
-  color: #000000dd;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  gap: 10px;
 }
 
-.logo-image {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 10px;
-  border-radius: 16px;
+.post-profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #eee;
 }
 
-form input {
-  width: 100%;
-  margin: 8px 0;
-  padding: 12px;
-  background-color: #fafafa;
-  border: 1px solid #dbdbdb;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-form button {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(to right, #00c6ff, #0072ff);
-  border: none;
-  border-radius: 6px;
-  color: white;
+.username {
   font-weight: bold;
-  font-size: 14px;
-  margin-top: 12px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  color: #333;
 }
 
-form button:hover {
-  background: linear-gradient(to right, #0072ff, #00c6ff);
+.post-img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  max-height: 400px;
 }
 
-.divider {
-  margin: 18px 0;
-  color: #0f1112ea;
+.post-content {
+  color: #444;
+  font-size: 15px;
 }
 
-.forgot {
-  display: block;
-  color: #58c8f4;
-  font-size: 12px;
-  margin-top: 15px;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.forgot:hover {
-  color: #0095f6;
-  text-decoration: underline;
-}
-
-.signup-box {
+/* Header */
+.top-bar {
   background-color: #fff;
-  border: 1px solid #dbdbdb;
-  padding: 18px 20px;
-  text-align: center;
-  font-size: 14px;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #ddd;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.signup-box a {
-  color: #58c8f4;
+nav a {
+  margin-left: 20px;
+  font-size: 18px;
+  color: #555;
   text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s, text-decoration 0.3s;
 }
 
-.signup-box a:hover {
-  color: #0095f6;
-  text-decoration: underline;
+nav a:hover {
+  color: #000;
+}
+
+.profile-icon i {
+  font-size: 22px;
 }
 
 /* Footer */
@@ -234,16 +212,13 @@ form button:hover {
 
   .story-container {
     width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
     position: static;
   }
 
   .story-card {
     position: relative;
-    transform: none !important;
     margin: 0 10px;
+    transform: none !important;
   }
 
   .card1,
@@ -251,26 +226,25 @@ form button:hover {
   .card3 {
     z-index: 1;
   }
+
+  .user-post-card {
+    max-width: 90vw;
+  }
 }
 
 @media (max-width: 480px) {
-  .logo {
-    font-size: 2.5rem;
+  .top-bar {
+    font-size: 18px;
+    padding: 12px 16px;
   }
 
-  .logo-image {
-    width: 80px;
-    height: 80px;
+  .post-profile-pic {
+    width: 32px;
+    height: 32px;
   }
 
-  form input,
-  form button {
-    font-size: 13px;
-    padding: 10px;
-  }
-
-  .signup-box {
-    font-size: 13px;
+  .post-content {
+    font-size: 14px;
   }
 
   .footer-links {
