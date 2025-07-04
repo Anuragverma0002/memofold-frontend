@@ -389,7 +389,7 @@ if (path.includes("mainfeed.html")) {
 
         const imageUrl = post.image?.trim()
           ? post.image
-          : "https://via.placeholder.com/300x200?text=No+Image";
+          : `https://ui-avatars.com/api/?name=Post&size=300&background=cccccc&color=000000`;
 
         let profilePic = post.profilePic;
         if (!profilePic || profilePic === "null" || profilePic.trim() === "") {
