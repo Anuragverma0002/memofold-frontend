@@ -546,7 +546,12 @@ if (path.includes("mainfeed.html")) {
 
           if (res.ok) {
             const data = await res.json();
-            profilePicImg.src = data.profilePic;
+            const BASE_BACKEND = "https://memofold-backend.onrender.com";
+
+profilePicImg.src = data.profilePic?.startsWith("http")
+  ? data.profilePic
+  : `${BASE_BACKEND}${data.profilePic}`;
+
             alert("✅ Profile picture updated!");
           } else {
             alert("❌ Failed to upload profile picture.");
