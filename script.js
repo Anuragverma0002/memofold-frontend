@@ -396,15 +396,19 @@ if (
             console.log("Fetched posts:", posts); // 🔍 Check this in browser console
         const imageUrl = post.image?.trim()
     ? post.image
-    : "https://via.placeholder.com/300x200?text=No+Image"; // ❌ replace this
+    : "https://via.placeholder.com/300x200?text=No+Image"; //
 
 
-let profilePic = post.profilePic?.trim();
+let profilePic = post.profilePic;
 
-if (!profilePic || profilePic === "") {
+if (
+  !profilePic || 
+  profilePic === "null" || 
+  profilePic === null || 
+  profilePic.trim() === ""
+) {
   profilePic = `https://ui-avatars.com/api/?name=${encodeURIComponent(post.username)}&background=random`;
 } else if (!profilePic.startsWith("http")) {
-  // Relative path, add backend domain
   profilePic = `https://memofold-backend.onrender.com${profilePic}`;
 }
 
