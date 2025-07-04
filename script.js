@@ -386,9 +386,7 @@ if (path.includes("mainfeed.html")) {
          feed.innerHTML = ""; // Clear existing content
         posts.forEach((post) => {
             console.log("Fetched posts:", posts); // 🔍 Check this in browser console
-        posts.forEach((post) => {
-  ...
-  const imageUrl = post.image?.trim()
+        const imageUrl = post.image?.trim()
     ? post.image
     : "https://via.placeholder.com/300x200?text=No+Image"; // ❌ replace this
 
