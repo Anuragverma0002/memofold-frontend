@@ -355,64 +355,60 @@ const API_BASE = "https://memofold-backend.onrender.com/api";
 
   //MainFeed Functionality
   
+// MainFeed Functionality
 if (path.includes("mainfeed.html")) {
-    console.log("🌐 MainFeed script running");
+  console.log("🌐 MainFeed script running");
 
-    const token = localStorage.getItem("token");
-    if (!token) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  // ✅ LOGOUT BUTTON HANDLER
+  const logoutBtn = document.querySelector("#nav-logout");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.clear();
       window.location.href = "login.html";
-      return;
-    }
-    // ✅ LOGOUT BUTTON HANDLER
-    const logoutBtn = document.querySelector("#nav-logout");
-    if (logoutBtn) {
-      logoutBtn.addEventListener("click", (e) => {
-        e.preventDefault(); // Prevent default <a> behavior
-        localStorage.clear(); // Remove token and user info
-        window.location.href = "login.html"; // Redirect to login
-      });
-    }
+    });
+  }
 
+  const feed = document.getElementById("feed");
 
-    const feed = document.getElementById("feed");
+  // ✅ ADD FETCH HERE
+  fetch(`${API_BASE}/posts`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((posts) => {
+      console.log("Fetched posts:", posts);
+      feed.innerHTML = ""; // Clear previous content
 
-let profilePic = post.profilePic;
-
-if (
-  !profilePic || 
-  profilePic === "null" || 
-  profilePic === null || 
-  profilePic.trim() === ""
-) {
-  profilePic = `https://ui-avatars.com/api/?name=${encodeURIComponent(post.username)}&background=random`;
-} else if (!profilePic.startsWith("http")) {
-  profilePic = `https://memofold-backend.onrender.com${profilePic}`;
-}
-
-      .then((res) => res.json())
-      .then((posts) => {
-         feed.innerHTML = ""; // Clear existing content
-        posts.forEach((post) => {
-            console.log("Fetched posts:", posts); // 🔍 Check this in browser console
+      posts.forEach((post) => {
         const imageUrl = post.image?.trim()
-    ? post.image
-    : "https://via.placeholder.com/300x200?text=No+Image"; //
+          ? post.image
+          : "https://via.placeholder.com/300x200?text=No+Image";
 
+        let profilePic = post.profilePic;
+        if (
+          !profilePic ||
+          profilePic === "null" ||
+          profilePic === null ||
+          profilePic.trim() === ""
+        ) {
+          profilePic = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+            post.username
+          )}&background=random`;
+        } else if (!profilePic.startsWith("http")) {
+          profilePic = `https://memofold-backend.onrender.com${profilePic}`;
+        }
 
-let profilePic = post.profilePic;
-
-if (
-  !profilePic || 
-  profilePic === "null" || 
-  profilePic === null || 
-  profilePic.trim() === ""
-) {
-  profilePic = `https://ui-avatars.com/api/?name=${encodeURIComponent(post.username)}&background=random`;
-} else if (!profilePic.startsWith("http")) {
-  profilePic = `https://memofold-backend.onrender.com${profilePic}`;
-}
-
-               const postCard = document.createElement("div");
+        const postCard = document.createElement("div");
         postCard.classList.add("user-post-card");
         postCard.innerHTML = `
           <div class="post-header">
@@ -422,13 +418,16 @@ if (
           ${imageUrl ? `<img class="post-img" src="${imageUrl}" alt="Post image" onerror="this.style.display='none'" />` : ""}
           <div class="post-content">${post.content}</div>
         `;
+
         feed.appendChild(postCard);
       });
     })
     .catch((err) => {
       console.error("Failed to fetch posts:", err);
+      feed.innerHTML = `<p class="error-message">Failed to load posts. Please try again later.</p>`;
     });
 }
+
 
 
   // =====================
