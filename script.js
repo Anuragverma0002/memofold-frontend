@@ -376,11 +376,19 @@ if (path.includes("mainfeed.html")) {
 
     const feed = document.getElementById("feed");
 
-    fetch(`${API_BASE}/posts`,{
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+let profilePic = post.profilePic;
+
+if (
+  !profilePic || 
+  profilePic === "null" || 
+  profilePic === null || 
+  profilePic.trim() === ""
+) {
+  profilePic = `https://ui-avatars.com/api/?name=${encodeURIComponent(post.username)}&background=random`;
+} else if (!profilePic.startsWith("http")) {
+  profilePic = `https://memofold-backend.onrender.com${profilePic}`;
+}
+
       .then((res) => res.json())
       .then((posts) => {
          feed.innerHTML = ""; // Clear existing content
