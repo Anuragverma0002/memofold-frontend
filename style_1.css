@@ -234,22 +234,35 @@ form button:hover {
 
   .story-container {
     width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    position: static;
-  }
-
-  .story-card {
+    height: 500px;
     position: relative;
-    transform: none !important;
-    margin: 0 10px;
   }
 
-  .card1,
-  .card2,
+  /* Keep staggered layout on all screen sizes */
+  .story-card {
+    position: absolute;
+    width: 250px;
+    height: 450px;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    transition: transform 0.5s, opacity 0.5s;
+    cursor: pointer;
+  }
+
+  .card1 {
+    z-index: 3;
+    transform: translateX(-40px) rotate(-4deg);
+  }
+
+  .card2 {
+    z-index: 4;
+    transform: translateX(0) rotate(0deg);
+  }
+
   .card3 {
-    z-index: 1;
+    z-index: 2;
+    transform: translateX(40px) rotate(4deg);
   }
 }
 
