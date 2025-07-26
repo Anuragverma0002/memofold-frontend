@@ -496,3 +496,66 @@ body.dark-mode .dropdown-content span:hover {
     font-size: 14px;
   }
 }
+
+/* Make body wrap on smaller screens */
+body {
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Ensure main content doesn't overflow */
+.main {
+  width: 100%;
+  max-width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+/* Post box responsiveness */
+.post-box {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Responsive topbar wrap */
+.topbar {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Content center mobile fix */
+.content-center {
+  margin-top: 40px;
+  padding: 0 12px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Make buttons and controls fill space better */
+.post-box button,
+.calendar-picker,
+.search-bar,
+.modern-feed-btn {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Calendar and feed group stacking */
+.calendar-feed-group {
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 10px;
+}
+
+/* Optional: make text area shrink a bit on small screens */
+@media (max-width: 480px) {
+  .post-box textarea {
+    height: 120px;
+    font-size: 14px;
+  }
+}
