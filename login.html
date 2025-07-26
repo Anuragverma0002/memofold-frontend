@@ -59,6 +59,28 @@
       <div class="footer-copy">© 2025 MemoFold</div>
     </footer>
   </div>
+ <script>
+  const cards = document.querySelectorAll(".story-card");
+  let current = 0;
+
+  function updateCards() {
+    cards.forEach((card, index) => {
+      card.classList.remove("card1", "card2", "card3");
+    });
+
+    cards[(current + 0) % 3].classList.add("card1");
+    cards[(current + 1) % 3].classList.add("card2");
+    cards[(current + 2) % 3].classList.add("card3");
+  }
+
+  document.querySelector(".story-container").addEventListener("click", () => {
+    current = (current + 1) % 3;
+    updateCards();
+  });
+
+  updateCards();
+</script>
+
   <script src="script.js"></script>
 </body>
 
