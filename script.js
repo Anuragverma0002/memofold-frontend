@@ -4,44 +4,52 @@ const API_BASE = "https://memofold-backend.onrender.com/api";
 
 
 
-  // ========== LOGIN ==========
-  if (path.includes("login.html")) {
-    const loginForm = document.querySelector("form");
-    const usernameInput = document.getElementById("username");
-    const passwordInput = document.getElementById("password");
+// ========== LOGIN ==========
+if (path.includes("login.html")) {
+  const loginForm = document.querySelector("form");
+  const usernameInput = document.getElementById("username");
+  const passwordInput = document.getElementById("password");
+  const loginBtn = document.querySelector("button[type='submit']");
 
-    loginForm?.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  loginForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      try {
-        const response = await fetch(`${API_BASE}/auth/login`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            username: usernameInput.value.trim(),
-            password: passwordInput.value.trim(),
-          }),
-          credentials: "include",
-        });
+    // Show loading spinner
+    loginBtn.disabled = true;
+    loginBtn.innerHTML = `<span class="spinner"></span> Logging in...`;
 
-        const data = await response.json();
+    try {
+      const response = await fetch(`${API_BASE}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: usernameInput.value.trim(),
+          password: passwordInput.value.trim(),
+        }),
+        credentials: "include",
+      });
 
-        if (!response.ok) {
-          alert(`Login failed: ${data.message || data.error || "Unknown error"}`);
-          return;
-        }
+      const data = await response.json();
 
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("username", usernameInput.value.trim());
-        localStorage.setItem("realname", data.realname);
-        alert("Login successful!");
-        window.location.href = "updMain.html";
-      } catch (err) {
-        console.error("Login error:", err);
-        alert("Login failed. Check internet or server.");
+      if (!response.ok) {
+        loginBtn.innerHTML = `Login`;
+        loginBtn.disabled = false;
+        return;
       }
-    });
-  }
+
+      // Save data and redirect
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("username", usernameInput.value.trim());
+      localStorage.setItem("realname", data.realname);
+      window.location.href = "updMain.html";
+    } catch (err) {
+      console.error("Login error:", err);
+      loginBtn.innerHTML = `Login`;
+      loginBtn.disabled = false;
+    }
+  });
+}
+
 
   // ========== SIGNUP ==========
   if (path.includes("signin.html")) {
